@@ -1,17 +1,12 @@
 services:
   - type: web
     name: ranking-system
-    runtime: python
+    env: python
+    region: ohio
     plan: free
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      reflex init
-    startCommand: reflex run --env prod --loglevel info --backend-only
+    branch: main
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: reflex run --env prod --loglevel info
     envVars:
-      - key: SUPABASE_URL
-        sync: false
-      - key: SUPABASE_KEY
-        sync: false
       - key: PYTHON_VERSION
-        value: 3.12.0
+        value: 3.11.0

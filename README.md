@@ -1,88 +1,38 @@
-📊 Liga Gambito Pro - Dashboard
-Dashboard de performance de assessores com Streamlit + Supabase.
+# Ranking System
 
-🚀 Instalação Local
-bash
-# 1. Criar ambiente virtual
-python3 -m venv venv
+Sistema de ranking desenvolvido com Reflex.
 
-# 2. Ativar
-source venv/bin/activate      # Linux/Mac
-source venv/Scripts/activate  # Windows Git Bash
+## 🚀 Deploy
 
-# 3. Instalar
-pip install streamlit supabase pandas plotly python-dotenv
+Deploy automático no Render: https://ranking-system-y7h1.onrender.com
 
-# 4. Configurar .env
-SUPABASE_URL=https://seu-projeto.supabase.co
-SUPABASE_KEY=sb_publishable_sua_chave
+## 💻 Desenvolvimento Local
 
-# 5. Executar
-streamlit run app.py
-📁 Estrutura
-text
-ranking-system/
-├── app.py           # Interface Streamlit
-├── database.py      # Conexão Supabase
-├── business.py      # Lógica de negócio
-├── requirements.txt
-└── .env            # Credenciais (não commitar)
-🌐 Deploy (Streamlit Community Cloud)
-Push para GitHub
+```bash
+# Instalar dependências
+pip install -r requirements.txt
 
-bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/seu-usuario/ranking-system.git
-git push -u origin main
-Deploy
+# Inicializar app
+reflex init
 
-Acesse: https://share.streamlit.io
+# Rodar em dev
+reflex run
+🔧 Variáveis de Ambiente
+DATABASE_URL: URL do banco de dados (opcional)
 
-New app → Connect GitHub
-
-Main file path: app.py
-
-Deploy
-
-Adicionar Secrets (Settings → Secrets)
+PORT: Porta do backend (auto no Render)
 
 text
-SUPABASE_URL = "https://seu-projeto.supabase.co"
-SUPABASE_KEY = "sb_publishable_sua_chave"
-🔧 Configuração do Banco
-Criar tabela no Supabase
-Execute no SQL Editor:
 
-sql
--- Ver arquivo: create_table_assessores.sql
-Importar dados
-Table Editor → assessores_performance
+## 📦 Como Aplicar o Patch
 
-Insert → Import from CSV
+```bash
+# 1. Atualizar rxconfig.py
+# Copie o código acima
 
-Selecione: assessores_historico_12meses.csv
+# 2. Commit e push
+git add rxconfig.py .gitignore
+git commit -m "fix: configure production URLs and WebSocket connection"
+git push origin main
 
-🎯 Features
-✅ Ranking de assessores por data
-
-✅ Evolução temporal (4-52 semanas)
-
-✅ Análise individual com gráficos
-
-✅ 3 modos de visualização
-
-📋 Credenciais Supabase
-Pegue em: Settings → API
-
-Project URL → SUPABASE_URL
-
-Publishable key → SUPABASE_KEY
-
-⚠️ Importante
-❌ NÃO commite o arquivo .env
-
-✅ Use secrets no Streamlit Cloud
-
-✅ O .gitignore já ignora .env
+# 3. O Render vai redesenhar automaticamente
