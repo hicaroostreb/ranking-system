@@ -1,5 +1,6 @@
 ﻿import reflex as rx
 import os
+from reflex.constants import LogLevel
 
 # Detecta ambiente automaticamente
 is_production = os.getenv("RENDER") == "true" or os.getenv("RENDER_EXTERNAL_URL") is not None
@@ -43,5 +44,5 @@ config = rx.Config(
     
     # Performance
     telemetry_enabled=False,
-    loglevel="info" if is_production else "debug",
+    loglevel=LogLevel.INFO if is_production else LogLevel.DEBUG,  # ✅ Enum correto
 )
