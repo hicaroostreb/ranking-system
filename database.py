@@ -1,12 +1,12 @@
 """
-database.py - Camada de acesso aos dados
-Todas as queries do Supabase ficam aqui
+database.py - Camada de acesso aos dados (Supabase)
 """
 import os
 from datetime import datetime, timedelta
-from supabase import create_client
+from supabase import create_client, Client
 from dotenv import load_dotenv
 
+# Carregar variáveis de ambiente
 load_dotenv()
 
 
@@ -18,9 +18,26 @@ class SupabaseDB:
         key = os.getenv("SUPABASE_KEY")
 
         if not url or not key:
-            raise ValueError("Configure SUPABASE_URL e SUPABASE_KEY no .env")
+            raise ValueError(
+                f"Configure SUPABASE_URL e SUPABASE_KEY no .env\n"
+                f"URL encontrada: {url}\n"
+                f"KEY encontrada: {'Sim' if key else 'Não'}"
+            )
 
-        self.client = create_client(url, key)
+        # Debug: mostrar o que foi lido (sem expor chave completa)
+        print(f"🔍 URL: {url}")
+        print(f"🔍 KEY (primeiros 20 chars): {key[:20] if key else 'None'}...")
+
+        try:
+            self.client = create_client(url, key)
+            print("✅ Conexão Supabase OK!")
+        except Exception as e:
+            raise ValueError(
+                f"Erro ao conectar Supabase: {e}\n"
+                f"URL: {url}\n"
+                f"KEY válida: {key.startswith('eyJ') if key else False}"
+            )
+
         self.table = "assessores_performance"
 
     def get_latest_date(self):
