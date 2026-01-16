@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ranking-system
+    runtime: python
+    plan: free
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      reflex init
+    startCommand: reflex run --env prod --loglevel info --backend-only
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.12.0
